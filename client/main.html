@@ -108,30 +108,47 @@
       <div class="status">Meteor Reproduction</div>
       <h1>Rspack client disconnects after a server-side edit</h1>
       <p>
-        This is a minimal reproduction for a Meteor development bug. With
+        This is a minimal reproduction for a Meteor development bug. On Windows,
+        with
         <code>rspack</code> installed, changing a server file causes the browser
         client to disconnect and stop recovering after Meteor restarts the
-        server. Without <code>rspack</code>, the same workflow keeps working.
+        server.
       </p>
 
       <h2>Project context</h2>
       <ul>
-        <li>The client is intentionally minimal.</li>
-        <li>The server is intentionally minimal.</li>
-        <li>The issue reproduces without app-specific client logic.</li>
-        <li>The issue disappears when <code>rspack</code> is not installed.</li>
-        <li>The issue reproduces on Windows 11.</li>
-        <li>The same repro works correctly in WSL.</li>
+        <li>
+          The issue reproduces on Windows 11 with <code>rspack</code> installed.
+        </li>
+        <li>Works correctly when <code>rspack</code> is not installed.</li>
+        <li>Works correctly in WSL (Linux).</li>
+        <li>No app-specific client logic.</li>
       </ul>
 
-      <h2>How to reproduce</h2>
+      <h2>How to reproduce (Windows only)</h2>
       <ol>
-        <li>Start the app in development mode.</li>
+        <li>
+          Ensure <code>rspack</code> is listed in <code>.meteor/packages</code>
+        </li>
+        <li>Start the app with <code>meteor run</code> on Windows</li>
         <li>Open the app in a browser and confirm the page loads.</li>
-        <li>Edit a server-side file such as <code>server/main.js</code>.</li>
+        <li>Edit <code>server/main.js</code> by changing any comment.</li>
         <li>Save the file and wait for Meteor to restart the server.</li>
-        <li>Watch the browser client lose connection and stop recovering.</li>
       </ol>
+
+      The error should have been triggered. Server will still be running, but
+      client no longer works.
+
+      <h2>How to prevent</h2>
+      <ol>
+        <li>
+          Remove or comment out <code>rspack</code> in
+          <code>.meteor/packages</code>
+        </li>
+        <li>Test again with same steps listed above.</li>
+      </ol>
+
+      The server should restart, but client will still have connection.
 
       <h2>Expected result</h2>
       <p>
@@ -151,17 +168,6 @@
 
 Error: read ECONNRESET</pre
       >
-
-      <h2>Environment notes</h2>
-      <ul>
-        <li>
-          Windows: the client disconnects after a server-side file change.
-        </li>
-        <li>
-          WSL: the issue does not reproduce after installing Node and running
-          the same project there.
-        </li>
-      </ul>
     </section>
   </main>
 </body>
