@@ -1,9 +1,9 @@
 node_modules/
 settings*.json
 settings/MONGO_URL.txt
-scripts
+/scripts/
 *.bat
-packages
+/packages/
 backups
 
 # Meteor Modern-Tools build context directories
