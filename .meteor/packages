@@ -22,4 +22,4 @@ static-html
 
 # Toggle rspack package to cause ECONNRESET error on server side change
 
-# rspack
+rspack

@@ -120,6 +120,8 @@
         <li>The server is intentionally minimal.</li>
         <li>The issue reproduces without app-specific client logic.</li>
         <li>The issue disappears when <code>rspack</code> is not installed.</li>
+        <li>The issue reproduces on Windows 11.</li>
+        <li>The same repro works correctly in WSL.</li>
       </ul>
 
       <h2>How to reproduce</h2>
@@ -149,6 +151,17 @@
 
 Error: read ECONNRESET</pre
       >
+
+      <h2>Environment notes</h2>
+      <ul>
+        <li>
+          Windows: the client disconnects after a server-side file change.
+        </li>
+        <li>
+          WSL: the issue does not reproduce after installing Node and running
+          the same project there.
+        </li>
+      </ul>
     </section>
   </main>
 </body>
